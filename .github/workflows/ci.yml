@@ -1,0 +1,46 @@
+name: HezTech CI / Build & Test
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-build:
+    name: Build & Verify HezTech
+    runs-on: windows-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install Root Dependencies
+        run: npm ci
+
+      - name: Install Frontend Dependencies
+        working-directory: ./heztech-frontend
+        run: npm ci
+
+      - name: Build Frontend UI
+        run: npm run build:ui
+
+      - name: Run Core Agent Tools & Chat Tests
+        run: npm test
+
+      - name: Run Identity Authority & Council Tests
+        run: npm run test:identity
+
+      - name: Run Social Intelligence & Media Engine Test Suite
+        run: node --test test/social-and-media-suite.test.cjs

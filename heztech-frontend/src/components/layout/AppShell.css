@@ -1,0 +1,95 @@
+.ht-shell {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--ht-bg-deep);
+}
+
+.ht-shell__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.ht-shell__header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 52px;
+  padding: 0 var(--ht-space-5);
+  border-bottom: 1px solid var(--ht-border);
+  background: var(--ht-bg-primary);
+  flex-shrink: 0;
+}
+
+.ht-shell__header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--ht-space-3);
+}
+
+.ht-live-orb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--ht-radius-full);
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
+  font-size: var(--ht-text-xs);
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.ht-live-orb-btn:hover {
+  background: rgba(16, 185, 129, 0.22);
+  border-color: #10b981;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.35);
+  transform: translateY(-1px);
+}
+
+.ht-live-orb-btn__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: htLivePulse 1.6s infinite ease-in-out;
+}
+
+.ht-live-orb-btn__mini-orb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #38bdf8 45%, #0284c7 90%);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+}
+
+.ht-lang-toggle {
+  padding: 6px 12px;
+  border-radius: var(--ht-radius-md);
+  background: var(--ht-bg-elevated);
+  border: 1px solid var(--ht-border);
+  color: var(--ht-text-secondary);
+  font-size: var(--ht-text-sm);
+  font-weight: 600;
+}
+
+.ht-lang-toggle:hover {
+  background: var(--ht-bg-hover);
+  color: var(--ht-text-primary);
+}
+
+.ht-shell__content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  position: relative;
+}

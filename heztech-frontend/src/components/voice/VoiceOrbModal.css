@@ -1,0 +1,600 @@
+/* =======================================================================
+   HEZTECH HOLOGRAPHIC VOICE ORB MODAL & COMPANION OVERLAY
+   Matching exact visual reference image media_1792587883510_51bdbb98.jpg
+   ======================================================================= */
+
+.ht-voice-orb-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  background: #030712;
+  background: radial-gradient(circle at 50% 38%, rgba(0, 110, 255, 0.28) 0%, rgba(5, 12, 24, 0.98) 65%, #030712 100%);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 32px 28px;
+  color: #ffffff;
+  user-select: none;
+  animation: htFadeInOrb 0.25s ease-out;
+  direction: ltr; /* Control pills and HUD radar are exact LTR symmetrical */
+}
+
+@keyframes htFadeInOrb {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Header & Top Bar */
+.ht-voice-orb-header {
+  width: 100%;
+  max-width: 780px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ht-voice-orb-top-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.ht-voice-orb-brand-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ht-voice-orb-brand-text {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.ht-voice-orb-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ht-voice-orb-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ht-voice-orb-icon-btn:hover {
+  background: rgba(0, 229, 255, 0.12);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.ht-voice-orb-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.14);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.ht-voice-orb-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: htLivePulse 1.6s infinite ease-in-out;
+}
+
+@keyframes htLivePulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.75);
+  }
+}
+
+.ht-voice-orb-close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.ht-voice-orb-close-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.5);
+  color: #ef4444;
+}
+
+/* Center Title Group */
+.ht-voice-orb-title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.ht-voice-orb-date {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: #64748b;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.ht-voice-orb-heading {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.ht-voice-orb-subheading {
+  font-size: 13px;
+  color: #94a3b8;
+  margin: 2px 0 0;
+}
+
+/* Holographic Stage */
+.ht-voice-orb-stage {
+  position: relative;
+  width: 340px;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 0;
+}
+
+/* Shockwave Ripple Rings */
+.ht-voice-ripple-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 229, 255, 0.45);
+  pointer-events: none;
+  opacity: 0;
+  animation: htRippleWave 2.4s cubic-bezier(0.1, 0.6, 0.3, 1) infinite;
+}
+
+.ht-voice-ripple-2 {
+  animation-delay: 0.8s;
+}
+
+.ht-voice-ripple-3 {
+  animation-delay: 1.6s;
+}
+
+@keyframes htRippleWave {
+  0% {
+    width: 195px;
+    height: 195px;
+    opacity: 0.8;
+  }
+  100% {
+    width: 340px;
+    height: 340px;
+    opacity: 0;
+  }
+}
+
+/* Concentric HUD SVG */
+.ht-voice-orb-hud-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ht-voice-orb-hud-rotating-ticks {
+  transform-origin: center;
+  animation: htRotateTicks 50s linear infinite;
+}
+
+.ht-voice-orb-hud-rotating-arcs {
+  transform-origin: center;
+  animation: htRotateArcs 22s linear infinite;
+}
+
+@keyframes htRotateTicks {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes htRotateArcs {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Central Glowing Sphere */
+.ht-voice-orb-central-sphere {
+  width: 195px;
+  height: 195px;
+  border-radius: 50%;
+  position: relative;
+  background: radial-gradient(circle at 45% 35%, #ffffff 0%, #a5f3fc 12%, #00e5ff 32%, #0284c7 60%, #032042 85%, #050d1a 100%);
+  box-shadow:
+    0 0 50px rgba(0, 229, 255, 0.8),
+    0 0 100px rgba(2, 132, 199, 0.6),
+    0 0 160px rgba(0, 110, 255, 0.35),
+    inset 0 0 30px rgba(255, 255, 255, 0.7);
+  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.ht-voice-orb-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Voice State Info & Transcript Box */
+.ht-voice-orb-status-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  max-width: 580px;
+  width: 100%;
+}
+
+.ht-voice-orb-agent-name {
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-shadow: 0 0 16px rgba(0, 229, 255, 0.6);
+}
+
+.ht-voice-orb-agent-state {
+  font-size: 13.5px;
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 600;
+}
+
+.ht-voice-orb-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00e5ff;
+  box-shadow: 0 0 8px #00e5ff;
+}
+
+.ht-voice-orb-status-dot--speaking {
+  background: #34d399;
+  box-shadow: 0 0 10px #34d399;
+  animation: htLivePulse 1.2s infinite ease-in-out;
+}
+
+.ht-voice-orb-active-tool-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #38bdf8;
+  background: rgba(14, 165, 233, 0.2);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  border-radius: 12px;
+  padding: 2px 10px;
+  margin-inline-start: 10px;
+  animation: htLivePulse 1.5s infinite ease-in-out;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Live Dialogue & Chat Feed Container */
+.ht-voice-orb-dialogue-feed {
+  width: 100%;
+  max-width: 580px;
+  height: 140px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(10, 15, 29, 0.75);
+  border: 1px solid rgba(0, 229, 255, 0.22);
+  border-radius: 16px;
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.6), 0 4px 20px rgba(0, 0, 0, 0.4);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 229, 255, 0.3) transparent;
+}
+
+.ht-voice-orb-empty-prompt {
+  margin: auto;
+  font-size: 12px;
+  color: #94a3b8;
+  text-align: center;
+  line-height: 1.6;
+  font-style: italic;
+  padding: 12px;
+}
+
+/* Chat Message Rows & Bubbles */
+.ht-voice-msg-row {
+  display: flex;
+  width: 100%;
+}
+
+.ht-voice-msg-row--user {
+  justify-content: flex-end;
+}
+
+.ht-voice-msg-row--assistant {
+  justify-content: flex-start;
+}
+
+.ht-voice-msg-row--tool {
+  justify-content: center;
+}
+
+.ht-voice-msg-bubble {
+  max-width: 82%;
+  padding: 8px 14px;
+  border-radius: 14px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  word-break: break-word;
+  position: relative;
+}
+
+.ht-voice-msg-bubble--user {
+  background: rgba(14, 165, 233, 0.22);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #f0fdf4;
+  border-bottom-right-radius: 4px;
+}
+
+.ht-voice-msg-bubble--assistant {
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  color: #e2e8f0;
+  border-bottom-left-radius: 4px;
+}
+
+.ht-voice-msg-sender {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  opacity: 0.8;
+}
+
+.ht-voice-msg-time {
+  font-size: 9px;
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+.ht-voice-msg-content {
+  font-size: 12.5px;
+}
+
+.ht-voice-msg-tool-pill {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10.5px;
+  color: #38bdf8;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px dashed rgba(56, 189, 248, 0.4);
+  border-radius: 12px;
+  padding: 3px 12px;
+  max-width: 90%;
+  text-align: center;
+}
+
+/* Interactive Text Input Row */
+.ht-voice-orb-input-row {
+  width: 100%;
+  max-width: 580px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.ht-voice-orb-text-input {
+  flex: 1;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 12px;
+  color: #f8fafc;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.ht-voice-orb-text-input:focus {
+  border-color: #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+.ht-voice-orb-send-btn {
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  border: 1px solid rgba(56, 189, 248, 0.6);
+  border-radius: 20px;
+  padding: 8px 18px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.ht-voice-orb-send-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  box-shadow: 0 0 12px rgba(14, 165, 233, 0.5);
+}
+
+.ht-voice-orb-send-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Bottom Controls Pill Toolbar */
+.ht-voice-orb-bottom-bar {
+  width: 100%;
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.ht-voice-orb-pill-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ht-orb-pill-btn {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(0, 229, 255, 0.28);
+  border-radius: 24px;
+  padding: 8px 18px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.18s ease;
+  backdrop-filter: blur(12px);
+}
+
+.ht-orb-pill-btn:hover {
+  background: rgba(0, 229, 255, 0.15);
+  border-color: #00e5ff;
+}
+
+.ht-orb-pill-btn--end {
+  border-color: rgba(239, 68, 68, 0.45);
+  background: rgba(239, 68, 68, 0.12);
+  color: #fca5a5;
+}
+
+.ht-orb-pill-btn--end:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: #ef4444;
+  color: #ffffff;
+}
+
+.ht-orb-pill-btn--active {
+  background: rgba(0, 229, 255, 0.2);
+  border-color: #00e5ff;
+  color: #38bdf8;
+}
+
+.ht-orb-pill-btn--icon-only {
+  padding: 8px 12px;
+}
+
+.ht-orb-pill-select-wrap {
+  position: relative;
+}
+
+.ht-orb-pill-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(0, 229, 255, 0.28);
+  border-radius: 24px;
+  padding: 8px 20px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.18s;
+  backdrop-filter: blur(12px);
+}
+
+.ht-orb-pill-select:hover,
+.ht-orb-pill-select:focus {
+  border-color: #00e5ff;
+  background: rgba(0, 229, 255, 0.15);
+}
+
+.ht-voice-orb-footnote {
+  font-size: 11px;
+  color: #64748b;
+  text-align: center;
+  line-height: 1.5;
+  max-width: 500px;
+  margin: 0;
+}

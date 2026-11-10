@@ -1,0 +1,58 @@
+{
+  "name": "jarvis-command-center",
+  "productName": "HezTech",
+  "version": "2.0.3",
+  "description": "HezTech (هستک) — Executive Desktop Workspace & Multi-Agent Intelligence Center",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "npm run build:ui && electron-builder --win --x64",
+    "pack": "npm run build:ui && electron-builder --dir",
+    "test": "node -e \"const fs=require('fs'),os=require('os'),path=require('path'),{spawnSync}=require('child_process');const dataDir=fs.mkdtempSync(path.join(os.tmpdir(),'heztech-npm-test-'));const env={...process.env,HEZTECH_DATA_DIR:dataDir,HEZTECH_TEST_ISOLATED:'1'};for(const key of ['GEMINI_API_KEY','HEZTECH_GEMINI_API_KEY','GOOGLE_API_KEY','GOOGLE_APPLICATION_CREDENTIALS','OPENROUTER_API_KEY','HEZTECH_OPENROUTER_API_KEY','OPENAI_API_KEY','ANTHROPIC_API_KEY','COHERE_API_KEY','MISTRAL_API_KEY','DEEPSEEK_API_KEY','GROQ_API_KEY','TOGETHER_API_KEY','FIREWORKS_API_KEY'])delete env[key];for(const file of ['test/test-agent-tools.js','test/test-live-session.js','test/test-chat-lifecycle.js']){const result=spawnSync(process.execPath,[file],{env,stdio:'inherit'});if(result.error){console.error(result.error);process.exitCode=1;break}if(result.status!==0){process.exitCode=result.status||1;break}}fs.rmSync(dataDir,{recursive:true,force:true});\"",
+    "build:ui": "npm --prefix heztech-frontend run build",
+    "test:identity": "node --test test/assistant-identity.test.cjs test/regression-arta-identity-council.test.cjs test/stage1-identity-authority.test.cjs"
+  },
+  "build": {
+    "appId": "com.heztech.commandcenter",
+    "productName": "HezTech",
+    "directories": {
+      "output": "../stack/releases/HezTech-2.0.3"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "bridge-server.mjs",
+      "package.json",
+      "src/**/*",
+      "public/**/*",
+      "third_party/**/*",
+      "heztech-frontend/dist/**/*",
+      "!**/*.bak*"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "artifactName": "HezTech-Setup.${ext}",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "HezTech",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "artifactName": "HezTech-Setup.exe"
+    },
+    "afterPack": "tools/brand-executable.cjs"
+  },
+  "dependencies": {
+    "@google/genai": "^2.30.0",
+    "express": "^4.21.2",
+    "ws": "^8.22.0"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8"
+  }
+}

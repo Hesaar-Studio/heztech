@@ -1,0 +1,61 @@
+.ht-page {
+  padding: var(--ht-space-6);
+  height: 100%;
+  overflow: auto;
+}
+
+.ht-page__header {
+  margin-bottom: var(--ht-space-6);
+}
+
+.ht-page__header h1 {
+  font-size: var(--ht-text-3xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.ht-page__lead {
+  margin-top: var(--ht-space-2);
+  font-size: var(--ht-text-base);
+  color: var(--ht-text-secondary);
+  max-width: 560px;
+}
+
+.ht-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--ht-space-4);
+}
+
+.ht-page__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ht-space-3);
+  padding: var(--ht-space-5);
+  border-radius: var(--ht-radius-lg);
+  background: var(--ht-bg-elevated);
+  border: 1px solid var(--ht-border);
+  color: var(--ht-text-primary);
+  font-size: var(--ht-text-base);
+  font-weight: 500;
+  transition: border-color var(--ht-duration), box-shadow var(--ht-duration);
+}
+
+.ht-page__card:hover {
+  border-color: var(--ht-border-strong);
+  box-shadow: var(--ht-shadow-glow);
+  color: var(--ht-accent-bright);
+}
+
+.ht-page__card svg {
+  color: var(--ht-accent-bright);
+}
+
+.ht-workspace-panel { display: block; padding: 24px; margin: 16px 0; background: var(--ht-bg-elevated); border: 1px solid var(--ht-border); border-radius: 16px; }
+.ht-workspace-panel h2 { font-size: 18px; margin-bottom: 12px; }
+.ht-workspace-panel p { white-space: pre-wrap; overflow-wrap: anywhere; color: var(--ht-text-secondary); margin-top: 12px; }
+.ht-workspace-panel textarea { display: block; width: 100%; margin-top: 12px; padding: 16px; resize: vertical; color: inherit; background: var(--ht-bg-deep); border: 1px solid var(--ht-border); border-radius: 12px; }
+.ht-workspace-action { padding: 12px 20px; background: var(--ht-accent); color: white; border-radius: 10px; margin: 12px 0; }
+button:disabled { cursor: default; opacity: .5; }
+select { color: var(--ht-text-primary); background: var(--ht-bg-elevated); border: 1px solid var(--ht-border); padding: 8px; border-radius: 8px; max-width: 350px; }

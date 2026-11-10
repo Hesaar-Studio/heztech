@@ -1,0 +1,62 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+**/secrets.*
+**/credentials.*
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/firebase-applet-config.json
+**/config.local.json
+**/settings.local.json
+
+# Personal data and application profiles
+/vault/
+/data/
+/stack/
+/evidence/
+/logs/
+**/vault/
+**/evidence/
+**/evidence/**
+**/logs/**
+**/conversations.json
+**/browser-profile/
+**/user-data/
+**/profile/
+.playwright-mcp/
+**/screenshots/
+**/screenshot-*/
+test-scratch-agent.txt
+
+# Logs, traces, and packaged application artifacts
+*.log
+*.log.*
+NVIDIA Corporation/
+*.asar
+*.dmp
+*.core
+*.gguf
+*.sqlite
+*.sqlite3
+*.db
+*.exe
+
+# Proprietary / internal exclusions
+*.archived
+*dtai*
+
+# Dependencies, generated output, and local recovery copies
+**/node_modules/
+/heztech-frontend/dist/
+/dist/
+/build/
+/release/
+/coverage/
+/backup*/
+/recovery-backups/
+/staging*/
+*.bak
+*.bak-*

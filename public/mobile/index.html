@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#070b14">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>HesaTech Mobile Companion</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="mobile.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app-shell">
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="brand-group">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="brand-title">
+          <span>HesaTech Mobile</span>
+          <span class="brand-sub" id="device-paired-label">همراه اندروید متصل</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="connection-pill" id="conn-pill">
+          <span class="status-dot" id="conn-dot"></span>
+          <span id="conn-text">آنلاین</span>
+        </div>
+        <button class="btn-icon" id="btn-pair-modal">جفت‌سازی</button>
+        <button class="btn-icon" id="btn-lang-toggle">EN</button>
+      </div>
+    </header>
+
+    <!-- Main Views Container -->
+    <main class="views-container">
+      <!-- 1. Assistant Chat View -->
+      <section id="view-chat" class="app-view active">
+        <div class="chat-model-bar">
+          <span id="lbl-active-model">مدل فعال:</span>
+          <span class="model-badge">
+            <svg style="width:12px;height:12px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z"/></svg>
+            <span id="txt-active-model">Gemini 3.8 Flash (Cloud)</span>
+          </span>
+        </div>
+
+        <div class="chat-messages" id="chat-messages-container">
+          <div class="chat-bubble assistant">
+            درود! به همراه هوشمند اندروید هساتک (HesaTech) خوش آمدید. تمامی فرامین اجرایی، مشورت با شورای هفت‌گانه و پایش ویندوز با بالاترین امنیت در دسترس شماست.
+            <div class="chat-bubble-meta">
+              <span>سیستم مرکزی</span>
+              <span>هم‌اکنون</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="quick-chips-row">
+          <button class="chip-btn" data-query="/ig-reel سناریوی ریلز هوش مصنوعی و اتوماسیون">🎬 ریلز اینستاگرام</button>
+          <button class="chip-btn" data-query="/ig-caption کپشن جذاب و بدون ردپای هوش مصنوعی">✍️ کپشن وایرال</button>
+          <button class="chip-btn" data-query="/ig-plan تقویم محتوای هفتگی تکنولوژی">📅 تقویم هفتگی</button>
+          <button class="chip-btn" data-query="وضعیت سیستم">📊 وضعیت سیستم</button>
+          <button class="chip-btn" data-query="یک تسک اضافه کن بررسی نهایی انتشار">📌 ثبت تسک</button>
+          <button class="chip-btn" data-query="تست اینترنت">🌐 تست پینگ</button>
+        </div>
+
+        <div class="chat-input-bar">
+          <input type="text" id="chat-input" class="chat-input" placeholder="دستور یا پرسش خود را بنویسید..." autocomplete="off">
+          <button id="btn-send-chat" class="btn-send">
+            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- 2. Council Mode View -->
+      <section id="view-council" class="app-view">
+        <div class="council-hero">
+          <h3>
+            <svg style="width:18px;height:18px;fill:var(--accent-purple)" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+            شورای هفت‌گانه هوش مصنوعی (Council)
+          </h3>
+          <p>بررسی چندعاملی ماموریت‌ها توسط معمار، امنیت، مهندس، ریسرچ، دواپس، منتقد و قاضی ارشد.</p>
+        </div>
+
+        <div class="council-form">
+          <input type="text" id="council-title" class="input-field" placeholder="عنوان ماموریت یا تصمیم استراتژیک...">
+          <textarea id="council-desc" class="input-field" rows="2" placeholder="جزئیات و الزامات اجرایی (اختیاری)..."></textarea>
+          
+          <div class="mode-pills">
+            <div class="mode-pill" data-mode="QUICK">سریع (۳ عامل)</div>
+            <div class="mode-pill active" data-mode="DEEP">عمیق (۷ عامل)</div>
+            <div class="mode-pill" data-mode="CRITICAL">بحرانی + سخت‌گیرانه</div>
+          </div>
+
+          <button id="btn-launch-council" class="btn-primary">
+            <svg style="width:16px;height:16px;fill:currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            ارسال ماموریت و آغاز شور شورا
+          </button>
+        </div>
+
+        <div id="council-results-container" class="council-results">
+          <!-- Dynamic council deliberation content -->
+        </div>
+      </section>
+
+      <!-- 3. Approvals Gate View -->
+      <section id="view-approvals" class="app-view">
+        <div class="council-hero" style="border-color: rgba(244,63,94,0.3); background: linear-gradient(135deg, rgba(244,63,94,0.1), rgba(12,20,39,0.5));">
+          <h3>
+            <svg style="width:18px;height:18px;fill:var(--accent-rose)" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+            درگاه تایید از راه دور (Human Approval Gate)
+          </h3>
+          <p>عملیات با ریسک بالا در ویندوز جهت اجرا نیازمند تایید مستقیم شما در این بخش می‌باشند.</p>
+        </div>
+
+        <div id="approvals-list-container" class="approval-list">
+          <!-- Dynamic pending approvals -->
+        </div>
+      </section>
+
+      <!-- 4. Telemetry & Graph View -->
+      <section id="view-telemetry" class="app-view">
+        <div class="telemetry-grid">
+          <div class="stat-card">
+            <span class="stat-title">پردازنده (CPU)</span>
+            <span class="stat-value" id="val-cpu">-%</span>
+            <span class="stat-sub" id="sub-cpu">بار پردازشی</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-title">حافظه رم (RAM)</span>
+            <span class="stat-value" id="val-ram">-%</span>
+            <span class="stat-sub" id="sub-ram">- / - GB</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-title">دیسک اصلی (C:)</span>
+            <span class="stat-value" id="val-disk">-%</span>
+            <span class="stat-sub" id="sub-disk">- GB آزاد</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-title">آپ‌تایم ویندوز</span>
+            <span class="stat-value" id="val-uptime">-</span>
+            <span class="stat-sub" id="sub-hostname">میزبان محلی</span>
+          </div>
+        </div>
+
+        <div class="topology-card">
+          <h4 style="font-size:13px; margin-bottom:10px; color:var(--accent-cyan);">اتصالات زنده شبکه و اجزا (Connections Graph)</h4>
+          <div class="node-row">
+            <span>هوش مصنوعی ابری (Gemini 3.8 Flash)</span>
+            <span class="verdict-tag approved" id="node-gemini">متصل</span>
+          </div>
+          <div class="node-row">
+            <span>سیستم‌عامل ویندوز (Host Core)</span>
+            <span class="verdict-tag approved" id="node-win">فعال</span>
+          </div>
+          <div class="node-row">
+            <span>پایگاه داده والت (Local Vault)</span>
+            <span class="verdict-tag approved" id="node-vault">متصل</span>
+          </div>
+          <div class="node-row">
+            <span>درگاه لوپ‌بک سرور (Port 18790)</span>
+            <span class="verdict-tag approved" id="node-bridge">آنلاین</span>
+          </div>
+          <div class="node-row">
+            <span>موتور اتوماسیون n8n</span>
+            <span class="verdict-tag conditional" id="node-n8n">تنظیم‌شده</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Vault & Tasks View -->
+      <section id="view-vault" class="app-view">
+        <div class="task-add-bar">
+          <input type="text" id="new-task-input" class="input-field" style="flex:1;" placeholder="عنوان تسک جدید...">
+          <button id="btn-add-task" class="btn-primary" style="padding:0 14px;">ثبت</button>
+        </div>
+
+        <div id="tasks-list-container" class="task-list">
+          <!-- Dynamic tasks -->
+        </div>
+
+        <div class="topology-card" style="margin-top:16px;">
+          <h4 style="font-size:13px; margin-bottom:8px; color:var(--accent-cyan);">یادداشت‌های اجرایی والت (notes.md)</h4>
+          <pre id="vault-notes-display" style="font-size:11px; color:var(--text-muted); white-space:pre-wrap; line-height:1.5; max-height:160px; overflow-y:auto;"></pre>
+        </div>
+      </section>
+
+      <!-- 6. Command Center Holographic Voice Orb View (Image 2 Exact Replica) -->
+      <section id="view-orb" class="app-view">
+        <div class="mob-orb-header">
+          <div class="mob-orb-date" id="mob-orb-date-label">COMMAND CENTER</div>
+          <div class="mob-orb-heading">COMMAND CENTER</div>
+          <div class="mob-orb-subheading">Talk it through with Orb, then catch today's brief.</div>
+        </div>
+
+        <div class="mob-orb-stage">
+          <div class="mob-ripple-ring"></div>
+          <div class="mob-ripple-ring"></div>
+          <div class="mob-ripple-ring"></div>
+
+          <svg class="mob-orb-hud-svg" viewBox="0 0 260 260">
+            <circle cx="130" cy="130" r="124" fill="none" stroke="rgba(0, 229, 255, 0.15)" stroke-width="1" />
+            <circle cx="130" cy="130" r="116" fill="none" stroke="rgba(0, 229, 255, 0.2)" stroke-width="1.2" stroke-dasharray="4 8" />
+            <g class="mob-orb-rotating-ticks">
+              <circle cx="130" cy="130" r="108" fill="none" stroke="rgba(0, 229, 255, 0.35)" stroke-width="2.5" stroke-dasharray="2 10" />
+            </g>
+            <g class="mob-orb-rotating-arcs">
+              <circle cx="130" cy="130" r="102" fill="none" stroke="rgba(0, 229, 255, 0.75)" stroke-width="2" stroke-dasharray="35 100" stroke-linecap="round" />
+              <circle cx="130" cy="130" r="84" fill="none" stroke="rgba(0, 229, 255, 0.35)" stroke-width="1" stroke-dasharray="5 5" />
+            </g>
+          </svg>
+
+          <div class="mob-orb-sphere" id="mob-orb-sphere">
+            <canvas id="mob-orb-canvas" class="mob-orb-canvas" width="145" height="145"></canvas>
+          </div>
+        </div>
+
+        <div class="mob-orb-status-area">
+          <div class="mob-orb-agent-name">ARTA / اَرتا</div>
+          <div class="mob-orb-agent-state" id="mob-orb-status-text">
+            <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent-cyan);box-shadow:0 0 6px var(--accent-cyan);"></span>
+            <span id="mob-orb-status-label">آماده گفتگو... (صحبت کنید)</span>
+          </div>
+          <div class="mob-orb-transcript" id="mob-orb-transcript">
+            «صحبت کنید تا کلمات شما و پاسخ زنده هساتک اینجا نمایش داده شود...»
+          </div>
+        </div>
+
+        <div class="mob-orb-bottom-bar">
+          <div class="mob-orb-pill-row">
+            <button id="mob-btn-orb-end" class="mob-pill-btn end">🔴 End</button>
+            <select id="mob-orb-voice-select" class="mob-pill-btn" style="outline:none;background:#0d1a2d;border:1px solid rgba(0,229,255,0.35);">
+              <option value="Kore" selected>Kore ▾</option>
+              <option value="Puck">Puck ▾</option>
+              <option value="Charon">Charon ▾</option>
+              <option value="Aoede">Aoede ▾</option>
+              <option value="Fenrir">Fenrir ▾</option>
+            </select>
+            <button id="mob-btn-orb-mode" class="mob-pill-btn active-action">🛡️ Listen-only</button>
+            <button id="mob-btn-orb-mic" class="mob-pill-btn">🎤 Mic Active</button>
+          </div>
+          <div class="mob-orb-footnote">
+            Requires connected device for system controls and notifications. Powered by Gemini 3.8 Live Engine.
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+      <div class="nav-tab active" data-view="view-chat">
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+        <span id="tab-label-chat">گفتگو</span>
+      </div>
+      <div class="nav-tab" data-view="view-orb">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>
+        <span id="tab-label-orb">کره صوتی</span>
+      </div>
+      <div class="nav-tab" data-view="view-council">
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+        <span id="tab-label-council">شورا</span>
+      </div>
+      <div class="nav-tab" data-view="view-approvals">
+        <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+        <span class="badge-counter" id="approval-badge">0</span>
+        <span id="tab-label-approvals">تایید هویت</span>
+      </div>
+      <div class="nav-tab" data-view="view-telemetry">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14h-2v-4h2v4zm0-6h-2V7h2v4z"/></svg>
+        <span id="tab-label-telemetry">تله‌متری</span>
+      </div>
+      <div class="nav-tab" data-view="view-vault">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        <span id="tab-label-vault">والت</span>
+      </div>
+    </nav>
+
+    <!-- Pairing Modal -->
+    <div class="modal-overlay" id="pairing-modal">
+      <div class="modal-content">
+        <h3 style="font-size:15px; color:#fff;" id="modal-pair-title">جفت‌سازی امن با رایانه میزبان</h3>
+        <p style="font-size:12px; color:var(--text-muted); line-height:1.4;" id="modal-pair-desc">
+          کد ۶ رقمی صادر شده در نرم‌افزار ویندوز هساتک را وارد نمایید تا مجوز ارتباطی رمزگذاری شده (Bearer Token) صادر شود.
+        </p>
+        <input type="text" id="pair-code-input" class="input-field" placeholder="کد ۶ رقمی (مثال: 849201)" maxlength="6" style="text-align:center; font-size:18px; letter-spacing:4px; font-weight:700;">
+        <input type="text" id="pair-devicename-input" class="input-field" placeholder="نام دستگاه (مثال: Samsung S24 Ultra)">
+        <div style="display:flex; gap:8px;">
+          <button id="btn-submit-pair" class="btn-primary" style="flex:1;">اتصال و دریافت مجوز</button>
+          <button id="btn-close-pair" class="btn-icon" style="padding:10px 14px;">بستن</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="mobile.js"></script>
+</body>
+</html>

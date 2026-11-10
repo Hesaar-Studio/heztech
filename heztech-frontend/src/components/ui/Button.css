@@ -1,0 +1,112 @@
+.ht-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--ht-radius-md);
+  font-weight: 500;
+  font-size: var(--ht-text-md);
+  line-height: 1.2;
+  transition: background var(--ht-duration) var(--ht-ease),
+    border-color var(--ht-duration) var(--ht-ease),
+    color var(--ht-duration) var(--ht-ease),
+    box-shadow var(--ht-duration) var(--ht-ease);
+  white-space: nowrap;
+}
+
+.ht-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ht-btn--sm {
+  padding: 6px 12px;
+  font-size: var(--ht-text-sm);
+}
+
+.ht-btn--md {
+  padding: 10px 16px;
+}
+
+.ht-btn--lg {
+  padding: 12px 20px;
+  font-size: var(--ht-text-base);
+}
+
+.ht-btn--primary {
+  background: var(--ht-accent);
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+.ht-btn--primary:hover:not(:disabled) {
+  background: var(--ht-accent-dim);
+  box-shadow: var(--ht-shadow-glow);
+}
+
+.ht-btn--accent {
+  background: var(--ht-accent-soft);
+  color: var(--ht-accent-bright);
+  border: 1px solid var(--ht-border-strong);
+}
+
+.ht-btn--accent:hover:not(:disabled) {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+.ht-btn--secondary {
+  background: var(--ht-bg-elevated);
+  color: var(--ht-text-primary);
+  border: 1px solid var(--ht-border);
+}
+
+.ht-btn--secondary:hover:not(:disabled) {
+  background: var(--ht-bg-hover);
+  border-color: var(--ht-border-strong);
+}
+
+.ht-btn--ghost {
+  background: transparent;
+  color: var(--ht-text-secondary);
+  border: 1px solid transparent;
+}
+
+.ht-btn--ghost:hover:not(:disabled) {
+  background: var(--ht-bg-hover);
+  color: var(--ht-text-primary);
+}
+
+.ht-btn--danger {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--ht-danger);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.ht-btn--danger:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.2);
+}
+
+.ht-btn__spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: ht-spin 0.6s linear infinite;
+}
+
+.ht-btn__label--loading {
+  opacity: 0.85;
+}
+
+@keyframes ht-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ht-btn__spinner {
+    animation: none;
+  }
+}
